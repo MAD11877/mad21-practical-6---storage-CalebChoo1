@@ -21,15 +21,12 @@ import java.util.List;
 import java.util.Random;
 
 public class ListActivity extends AppCompatActivity {
-    User u;
     static ArrayList<User> userList;
+    DBHandler dbHandler = new DBHandler(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-
-        DBHandler dbHandler = new DBHandler(this);
-        userList = dbHandler.getUsers();
 
         if (dbHandler.checkDB()) {
             for(int i=0; i<20; i++) {
@@ -37,14 +34,14 @@ public class ListActivity extends AppCompatActivity {
                 String ranInt = "" + String.valueOf(ran.nextInt());
                 Random rand = new Random();
                 String randInt = " " + String.valueOf(rand.nextInt());
-                u = new User();
+                User u = new User();
                 u.setName("Name" + ranInt);
                 u.setDesc("Description" + randInt);
                 u.setFollow(ran.nextBoolean());
-                userList.add(u);
                 dbHandler.addUser(u);
             }
         }
+        userList = dbHandler.getUsers();
 
         RecyclerView rv = findViewById(R.id.rv);
         UsersAdapter adapter = new UsersAdapter(this,userList);
