@@ -29,7 +29,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         DBHandler dbHandler = new DBHandler(this);
-         userList = dbHandler.getUser("*");
+         userList = dbHandler.getUsers("*");
 
         if (dbHandler.checkDB()) {
             for(int i=0; i<20; i++) {

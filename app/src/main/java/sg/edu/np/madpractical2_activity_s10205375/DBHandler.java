@@ -55,7 +55,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<User> getUser(String name) {
+    public ArrayList<User> getUsers(String name) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from USERS",null);
         User u = null;
