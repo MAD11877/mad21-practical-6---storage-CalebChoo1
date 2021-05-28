@@ -52,7 +52,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Profile");
                 builder.setMessage(u.name);
-                builder.setPositiveButton("View", new DialogInterface.OnClickListener(){
+                builder.setPositiveButton("VIEW", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
                         Random ran = new Random();
                         String ranInt = " " + String.valueOf(ran.nextInt());
