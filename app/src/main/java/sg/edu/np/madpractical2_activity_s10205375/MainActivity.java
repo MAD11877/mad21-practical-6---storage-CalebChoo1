@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    User u;
+    User targetUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,17 +21,17 @@ public class MainActivity extends AppCompatActivity {
 
         Intent in = getIntent();
         int position = in.getIntExtra("row",0);
-        u = ListActivity.data.get(position);
+        targetUser = ListActivity.userList.get(position);
 
         TextView name = findViewById(R.id.name);
-        name.setText(u.name);
+        name.setText(targetUser.name);
         TextView desc = findViewById((R.id.desc));
-        desc.setText(u.description);
+        desc.setText(targetUser.description);
         setFollowBtn();
     }
     private void setFollowBtn() {
         Button fBtn = findViewById(R.id.btnFollow);
-        if(u.followed) {
+        if(targetUser.followed) {
             fBtn.setText("Unfollow");
         }
         else {
@@ -39,16 +39,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void onFollowClick(View v) {
-        DBHandler db = new DBHandler(this);
-        u.followed = !u.followed;
-        if(u.followed){
+        DBHandler dbHandler = new DBHandler(this);
+        targetUser.followed = !targetUser.followed;
+        if(targetUser.followed){
             Toast.makeText(this, "Followed", Toast.LENGTH_SHORT).show();
         }
         else
         {
             Toast.makeText(this,"Unfollowed", Toast.LENGTH_SHORT).show();
         }
-        db.updateUser(u);
+        dbHandler.updateUser(targetUser);
         setFollowBtn();
     }
 }

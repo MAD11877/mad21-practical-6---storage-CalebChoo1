@@ -22,16 +22,16 @@ import java.util.Random;
 
 public class ListActivity extends AppCompatActivity {
     User u;
-    static ArrayList<User> data;
+    static ArrayList<User> userList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        DBHandler db = new DBHandler(this);
-         data = db.getUser("*");
+        DBHandler dbHandler = new DBHandler(this);
+         userList = dbHandler.getUser("*");
 
-        if (db.checkDB()) {
+        if (dbHandler.checkDB()) {
             for(int i=0; i<20; i++) {
                 Random ran = new Random();
                 String ranInt = "" + String.valueOf(ran.nextInt());
@@ -41,13 +41,13 @@ public class ListActivity extends AppCompatActivity {
                 u.setName("Name" + ranInt);
                 u.setDesc("Description" + randInt);
                 u.setFollow(ran.nextBoolean());
-                data.add(u);
-                db.addUser(u);
+                userList.add(u);
+                dbHandler.addUser(u);
             }
         }
 
         RecyclerView rv = findViewById(R.id.rv);
-        UsersAdapter adapter = new UsersAdapter(this,data);
+        UsersAdapter adapter = new UsersAdapter(this,userList);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rv.setLayoutManager(lm);
         rv.setAdapter(adapter);
