@@ -40,9 +40,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void addUser(User user) {
         ContentValues values = new ContentValues();
-        values.put("NAME",user.getName());
-        values.put("DESCRIPTION", user.getDesc());
-        values.put("FOLLOWED", user.getFollow());
+        values.put("name",user.getName());
+        values.put("description", user.getDesc());
+        values.put("followed", user.getFollow());
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert("USERS", null, values);
@@ -52,9 +52,9 @@ public class DBHandler extends SQLiteOpenHelper {
     public void updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("NAME", user.getName());
-        values.put("DESCRIPTION", user.getDesc());
-        values.put("FOLLOWED", user.getFollow());
+        values.put("name", user.getName());
+        values.put("description", user.getDesc());
+        values.put("followed", user.getFollow());
 
         db.update(USERS_TABLE, values, COLUMN_ID + " = ?", new String[] {String.valueOf(user.getId())});
         db.close();
