@@ -28,18 +28,24 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        data = new ArrayList<User>();
-        for(int i=0; i<20; i++) {
-            Random ran = new Random();
-            String ranInt = "" + String.valueOf(ran.nextInt());
-            Random rand = new Random();
-            String randInt = " " + String.valueOf(rand.nextInt());
-            u = new User();
-            u.setName("Name" + ranInt);
-            u.setDesc("Description" + randInt);
-            u.setFollow(ran.nextBoolean());
-            data.add(u);
+        DBHandler db = new DBHandler(this);
+         data = db.getUser("*");
+
+        if (db.checkDB()) {
+            for(int i=0; i<20; i++) {
+                Random ran = new Random();
+                String ranInt = "" + String.valueOf(ran.nextInt());
+                Random rand = new Random();
+                String randInt = " " + String.valueOf(rand.nextInt());
+                u = new User();
+                u.setName("Name" + ranInt);
+                u.setDesc("Description" + randInt);
+                u.setFollow(ran.nextBoolean());
+                data.add(u);
+                db.addUser(u);
+            }
         }
+
         RecyclerView rv = findViewById(R.id.rv);
         UsersAdapter adapter = new UsersAdapter(this,data);
         LinearLayoutManager lm = new LinearLayoutManager(this);

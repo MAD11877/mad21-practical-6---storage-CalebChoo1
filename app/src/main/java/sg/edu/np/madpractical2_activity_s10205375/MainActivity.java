@@ -3,6 +3,7 @@ package sg.edu.np.madpractical2_activity_s10205375;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Random ran = new Random();
         Intent in = getIntent();
         int position = in.getIntExtra("row",0);
         u = ListActivity.data.get(position);
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void onFollowClick(View v) {
+        DBHandler db = new DBHandler(this);
         u.followed = !u.followed;
         if(u.followed){
             Toast.makeText(this, "Followed", Toast.LENGTH_SHORT).show();
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(this,"Unfollowed", Toast.LENGTH_SHORT).show();
         }
+        db.updateUser(u);
         setFollowBtn();
     }
 }
