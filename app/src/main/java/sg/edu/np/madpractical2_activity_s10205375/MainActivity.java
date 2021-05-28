@@ -3,14 +3,11 @@ package sg.edu.np.madpractical2_activity_s10205375;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     User targetUser;
@@ -23,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         int position = in.getIntExtra("row",0);
         targetUser = ListActivity.userList.get(position);
 
-        TextView name = findViewById(R.id.name);
+        TextView name = findViewById(R.id.txtName);
         name.setText(targetUser.name);
         TextView desc = findViewById((R.id.desc));
         desc.setText(targetUser.description);
