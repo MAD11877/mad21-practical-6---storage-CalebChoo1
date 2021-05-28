@@ -57,7 +57,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
                         Random ran = new Random();
                         String ranInt = " " + String.valueOf(ran.nextInt());
                         Intent in = new Intent(context, MainActivity.class);
-                        in.putExtra("row", position);
+                        in.putExtra("id", position);
                         context.startActivity(in);
                     }
                 });
